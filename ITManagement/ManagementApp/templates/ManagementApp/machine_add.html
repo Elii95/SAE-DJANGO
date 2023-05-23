@@ -1,0 +1,30 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <h1>Add Machine</h1>
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="user">User:</label>
+            {{ form.user }}
+        </div>
+        
+        <div class="form-group">
+            <label for="nom">Nom:</label>
+            {{ form.nom }}
+        </div>
+        
+        <div class="form-group">
+            <label for="maintenanceDate">Maintenance Date:</label>
+            {{ form.maintenanceDate }}
+        </div>
+        
+        <div class="form-group">
+            <label for="mach">Type:</label>
+            {{ form.mach }}
+        </div>
+        
+        <input type="submit" value="Add" class="btn btn-primary">
+    </form>
+{% endblock %}

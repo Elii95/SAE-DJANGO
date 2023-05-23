@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <h1>Machines</h1>
+    <a href="{% url 'machine_add' %}"> <button type="button" class="btn btn-primary">Add Machine</button>
+        </a>
+    <ul>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>User</th>
+                    <th>Date de maintenance</th>
+                    <th>Machine</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for machine in machines %}
+                <tr>
+                    <td>{{ machine.id }}</td>
+                    <td>{{ machine.user.username }}</td>
+                    <td>{{ machine.maintenanceDate }}</td>
+                    <td>{{ machine.mach }}</td>
+                    <td>
+                        <a href="{% url 'machine_detail' machine.id %}" class="btn btn-info btn-sm mb-3"> Detail  </a>
+                        <a href="{% url 'machine_delete' machine.id %}"  class="btn btn-danger btn-sm mb-3">Delete  </a>                  
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </ul>
+{% endblock %}

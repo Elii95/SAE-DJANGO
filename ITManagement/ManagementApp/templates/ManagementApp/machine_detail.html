@@ -1,0 +1,9 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <h1>{{ machine.nom }}</h1>
+    <p> <strong>Id</strong> : {{ machine.id}}</p>
+    <p> <strong> User </strong> : {{ machine.user.username }}</p>
+    <p> <strong>Date de maintenance </strong> : {{ machine.maintenanceDate}}</p>
+    <p> <strong>Machine </strong> : {{ machine.mach}}</p>
+{% endblock %}

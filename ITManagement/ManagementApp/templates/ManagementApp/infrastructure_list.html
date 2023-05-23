@@ -1,0 +1,30 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <h1>Infrastructures</h1>
+    <a href="{% url 'infrastructure_add' %}">Add Infrastructure</a>
+    <ul>
+        {% for infrastructure in infrastructures %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Responsible</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ infrastructure.id }}</td>
+                    <td>{{ infrastructure.nom }}</td>
+                    <td>{{ infrastructure.responsible.username }}</td>
+                    <td>
+                        <a href="{% url 'infrastructure_detail' infrastructure.id %}">Detail</a>
+                        <a href="{% url 'infrastructure_delete' infrastructure.id%}">Delete</a>
+                </tr>
+            </tbody>
+        </table>
+        {% endfor %}
+    </ul>
+{% endblock %}
