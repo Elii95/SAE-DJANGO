@@ -1,0 +1,11 @@
+{% extends 'index.html' %}
+
+{% block content %}
+  <h1>Supprimer machine</h1>
+  <p>Êtes-vous sûr de vouloir supprimer machine "{{ machine.nom }} " ?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirmer</button>
+    <button type="submit" formaction="{% url 'machine_list' %}">Annuler</button>
+  </form>
+{% endblock %}

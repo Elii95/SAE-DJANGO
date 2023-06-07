@@ -1,0 +1,11 @@
+{% extends 'index.html' %}
+
+{% block content %}
+  <h1>Supprimer infrastructure</h1>
+  <p>Êtes-vous sûr de vouloir supprimer l'infrastructure "{{ infrastructure.nom }}" ?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirmer</button>
+    <button type="submit" formaction="{% url 'infrastructure_list' %}">Annuler</button>
+  </form>
+{% endblock %}

@@ -2,14 +2,13 @@
 
 {% block content %}
     <h1>Machines</h1>
-    <a href="{% url 'machine_add' %}"> <button type="button" class="btn btn-primary">Add Machine</button>
+    <a href="{% url 'machine_add' %}" class="btn btn-primary btn-sm mb-3"> Add Machine
         </a>
     <ul>
         <table class="table">
             <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>User</th>
+                    <th>utilisateur</th>
                     <th>Date de maintenance</th>
                     <th>Machine</th>
                     <th>Actions</th>
@@ -18,8 +17,7 @@
             <tbody>
                 {% for machine in machines %}
                 <tr>
-                    <td>{{ machine.id }}</td>
-                    <td>{{ machine.user.username }}</td>
+                    <td> {{ machine.user.prenom}} {{ machine.user.nom }}</td>
                     <td>{{ machine.maintenanceDate }}</td>
                     <td>{{ machine.mach }}</td>
                     <td>

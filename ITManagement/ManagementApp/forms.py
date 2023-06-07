@@ -1,6 +1,6 @@
 from django import forms
-from django.contrib.auth.models import User
-from .models import Machine, Infrastructure
+from .models import Machine, Infrastructure, Utilisateur
+
 
 class AddMachineForm(forms.ModelForm):
     class Meta:
@@ -12,19 +12,23 @@ class AddMachineForm(forms.ModelForm):
             'maintenanceDate': forms.DateInput(attrs={'class': 'form-control'}),
             'mach': forms.Select(attrs={'class': 'form-control'}),
         }
-
-        def clean_name(self):
-            name = self.cleaned_data['nom']
-            if len(name) < 6:
-                raise forms.ValidationError("Name must be at least 6 characters long")
-            return name
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['user'].queryset = Utilisateur.objects.filter(role='employe')
         
 class InfrastructureForm(forms.ModelForm):
     class Meta:
         model = Infrastructure
-        fields = ['nom', 'responsible']
+        fields = ['nom', 'responsable']
         widgets = {
-            'responsible': forms.Select(attrs={'class': 'form-control'})
+            'responsable': forms.Select(attrs={'class': 'form-control'})
         }
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['responsable'].queryset = Utilisateur.objects.filter(role='responsable')
 
         
+class UtilisateurForm(forms.ModelForm):
+    class Meta:
+        model = Utilisateur
+        fields = ('prenom', 'nom', 'email', 'role')

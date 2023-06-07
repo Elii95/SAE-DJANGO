@@ -1,0 +1,9 @@
+{% extends 'index.html' %}
+
+{% block content %}
+  <h1>Détails de l'utilisateur</h1>
+  <p>Nom : {{ utilisateur.nom }}</p>
+  <p>Prénom : {{ utilisateur.prenom }}</p>
+  <p>Email : {{ utilisateur.email }}</p>
+  <p>Rôle : {{ utilisateur.role }}</p>
+{% endblock %}
