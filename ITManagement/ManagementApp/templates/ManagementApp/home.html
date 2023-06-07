@@ -1,13 +1,72 @@
 {% extends 'index.html' %}
 {% load static %}
 {% block content %}
-<div class="container-fluid">
-    <div class="container">
-      <h1 class="display-4">Bienvenue sur notre site</h1>
-      <p class="lead">Découvrez nos machines et infrastructures</p>
-      <a href="{% url 'machine_list' %}" class="btn btn-primary btn-lg">Voir les machines</a>
-      <a href="{% url 'infrastructure_list' %}" class="btn btn-secondary btn-lg">Voir les infrastructures</a>
-    </div>
-  </div>
+<div class="container-fluid py-3" style="background-image: url({% static 'images/2.png' %}); background-size: cover; background-position: center;">
+    <div class="container d-flex justify-content-center align-items-center" style="height: 85vh;">
+      <h1 id="welcome-heading" class="text-center">Bienvenue sur le site de R&T Development, votre passerelle vers l'avenir technologique !</h1>
+ </div>
+
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+body {
+    background-color: #f8f9fa;
+  }
+
+  .container {
+    max-width: 800px;
+  }
+
+  .d-flex {
+    display: flex;
+  }
+
+  .justify-content-center {
+    justify-content: center;
+  }
+
+  .align-items-center {
+    align-items: center;
+  }
+
+  .text-center {
+    text-align: center;
+    color: #fff;
+  }
+
+  #welcome-heading {
+    font-size: 36px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
 {% endblock %}
