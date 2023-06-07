@@ -4,10 +4,12 @@
   <h2>Détails de l'infrastructure</h2>
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title">{{ infrastructure.nom }}</h5>
+      <h5 class="card-title py-2">{{ infrastructure.nom }}</h5>
       <p class="card-text">Etage: {{ infrastructure.etage }}</p>
       <p class="card-text">Responsable: {{ infrastructure.responsable }}</p>
       <p class="card-text">Machine: {{ infrastructure.machine }}</p>
+      <a href="{% url 'infrastructure_update' infrastructure.id %}" class="btn btn-success">Modifier</a>
+      <a href="{% url 'infrastructure_list' %}" class="btn btn-primary">Retour</a>
     </div>
   </div>
 </div>

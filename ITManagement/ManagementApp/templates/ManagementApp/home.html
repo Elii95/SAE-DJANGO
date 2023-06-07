@@ -4,28 +4,43 @@
 <div class="container-fluid py-3" style="background-image: url({% static 'images/2.png' %}); background-size: cover; background-position: center;">
     <div class="container d-flex justify-content-center align-items-center" style="height: 85vh;">
       <h1 id="welcome-heading" class="text-center">Bienvenue sur le site de R&T Development, votre passerelle vers l'avenir technologique !</h1>
- </div>
-
+    </div>
 </div>
 
+<audio id="background-music" src="{% static 'audios/music.mp3' %}" loop autoplay></audio>
 
+<button id="toggle-sound" class="btn btn-primary rounded-circle" style="position: fixed; bottom: 20px; left: 20px;">
+  <i class="fas fa-volume-up"></i>
+</button>
 
+<script src="https://kit.fontawesome.com/f6e8453d0a.js" crossorigin="anonymous"></script>
+<script>
+  // Add fade-in animation to the heading
+  const welcomeHeading = document.getElementById('welcome-heading');
+  welcomeHeading.style.opacity = 0;
 
+  setTimeout(() => {
+    welcomeHeading.style.transition = 'opacity 1s ease';
+    welcomeHeading.style.opacity = 1;
+  }, 500);
 
+  // Toggle sound on button click
+  const toggleSoundButton = document.getElementById('toggle-sound');
+  const backgroundMusic = document.getElementById('background-music');
 
+  toggleSoundButton.addEventListener('click', () => {
+    if (backgroundMusic.paused) {
+      backgroundMusic.play();
+      toggleSoundButton.innerHTML = '<i class="fas fa-volume-up"></i>';
+    } else {
+      backgroundMusic.pause();
+      toggleSoundButton.innerHTML = '<i class="fas fa-volume-mute"></i>';
+    }
+  });
+</script>
 
-
-
-
-
-
-
-
-
-
-
-
-body {
+<style>
+  body {
     background-color: #f8f9fa;
   }
 
@@ -56,17 +71,5 @@ body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   }
 </style>
-
-
-
-
-
-
-
-
-
-
-
-
 
 {% endblock %}

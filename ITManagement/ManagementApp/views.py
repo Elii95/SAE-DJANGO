@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Machine, Infrastructure, Utilisateur, Update
+from .models import Machine, Infrastructure, Utilisateur
 from .forms import AddMachineForm, InfrastructureForm, UtilisateurForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -31,33 +31,36 @@ def machine_list(request):
     context = {'machines': machines}
     return render(request, 'machine/machine_list.html', context)
 
-def update_machine(request, machine_id):
-    machine = Machine.objects.get(id=machine_id)
-
-    update = Update(machine=machine, updated_by=request.user)
-    update.save()
-
-    return redirect('machine_detail', machine_id=machine_id)
-
-@login_required
-def machine_detail(request, pk):
-    machine = get_object_or_404(Machine, id=pk)
-    updates = Update.objects.filter(machine=machine).order_by('-updated_at')
-    context = {'machine': machine,
-               'updates': updates
-               }
-    return render(request, 'machine/machine_detail.html', context)
-
 @login_required
 def machine_add(request):
     if request.method == 'POST':
         form = AddMachineForm(request.POST or None)
         if form.is_valid():
-            new_machine = Machine(nom=form.cleaned_data['nom'], user=form.cleaned_data['user'], maintenanceDate=form.cleaned_data['maintenanceDate'], mach=form.cleaned_data['mach'], ip=form.cleaned_data['ip'])
+            new_machine = Machine(nom=form.cleaned_data['nom'], user=form.cleaned_data['user'], maintenanceDate=form.cleaned_data['maintenanceDate'], mach=form.cleaned_data['mach'], ip=form.cleaned_data['ip'], etat=form.cleaned_data['etat'])
             new_machine.save()
             return redirect('machine_list')
     else:
         form = AddMachineForm()
+    context = {'form': form}
+    return render(request, 'machine/machine_add.html', context)
+
+@login_required
+def machine_detail(request, pk):
+    machine = get_object_or_404(Machine, id=pk)
+    context = {'machine': machine,
+               }
+    return render(request, 'machine/machine_detail.html', context)
+
+@login_required
+def machine_update(request, pk):
+    machine = get_object_or_404(Machine, id=pk)
+    if request.method == 'POST':
+        form = AddMachineForm(request.POST or None, instance=machine)
+        if form.is_valid():
+            form.save()
+            return redirect('machine_detail', pk=machine.pk)
+    else:
+        form = AddMachineForm(instance=machine)
     context = {'form': form}
     return render(request, 'machine/machine_add.html', context)
 
@@ -95,6 +98,18 @@ def infrastructure_add(request):
     return render(request, 'infrastructure/infrastructure_add.html', {'form': form})
 
 @login_required
+def infrastructure_update(request, pk):
+    infrastructure = get_object_or_404(Infrastructure, id=pk)
+    if request.method == 'POST':
+        form = InfrastructureForm(request.POST or None, instance=infrastructure)
+        if form.is_valid():
+            form.save()
+            return redirect('infrastructure_detail', pk=infrastructure.pk)
+    else:
+        form = InfrastructureForm(instance=infrastructure)
+    return render(request, 'infrastructure/infrastructure_add.html', {'form': form})
+
+@login_required
 def infrastructure_delete(request, pk):
     infrastructure = get_object_or_404(Infrastructure, id=pk)
     if request.method == 'POST':
@@ -128,10 +143,9 @@ def utilisateur_create(request):
 def utilisateur_update(request, pk):
     utilisateur = get_object_or_404(Utilisateur, id=pk)
     if request.method == 'POST':
-        form = UtilisateurForm(request.POST, instance=utilisateur)
+        form = UtilisateurForm(request.POST or None, instance=utilisateur)
         if form.is_valid():
-            utilisateur = Utilisateur(nom=form.cleaned_data['nom'], prenom=form.cleaned_data['prenom'], email=form.cleaned_data['email'], role=form.cleaned_data['role'])
-            utilisateur.save()
+            form.save()
             return redirect('utilisateur_detail', pk=utilisateur.pk)
     else:
         form = UtilisateurForm(instance=utilisateur)

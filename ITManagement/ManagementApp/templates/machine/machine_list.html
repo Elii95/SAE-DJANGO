@@ -3,29 +3,22 @@
 <div class="container">
   <h1>Liste des machines</h1>
   <a href="{% url 'machine_add' %}" class="btn btn-primary mb-3">Ajouter une machine</a>
-  <div class="card">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Nom</th>
-        <th>Utilisateur</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for machine in machines %}
-      <tr>
-        <td>{{ machine.nom }}</td>
-        <td>{{ machine.user }}</td>
-        <td>
-          <a href="{% url 'machine_detail' machine.id %}" class="btn btn-sm btn-info">Détails</a>
-          <a href="{% url 'machine_delete' machine.id %}" class="btn btn-sm btn-danger">Supprimer</a>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
-
+  <div class="row">
+    {% for machine in machines %}
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">{{ machine.nom }}</h5>
+          <p class="card-text">Utilisateur: {{ machine.user }}</p>
+          <p class="card-text">Etat: {{ machine.etat }}</p>
+          <div class="d-grid gap-2">
+            <a href="{% url 'machine_detail' machine.id %}" class="btn btn-info">Détails</a>
+            <a href="{% url 'machine_delete' machine.id %}" class="btn btn-danger">Supprimer</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
 </div>
 {% endblock %}

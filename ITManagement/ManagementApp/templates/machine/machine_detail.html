@@ -4,11 +4,13 @@
   <h2>Détails de la machine</h2>
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title">{{ machine.nom }}</h5>
+      <h5 class="card-title py-2">{{ machine.nom }}</h5>
       <p class="card-text">Type: {{ machine.mach }}</p>
       <p class="card-text">Maintenance Date: {{ machine.maintenanceDate }}</p>
       <p class="card-text">Ip: {{ machine.ip }}</p>
+      <p class="card-text">Etat: {{ machine.etat }}</p> 
       <p class="card-text">Utilisateur: {{ machine.user }}</p>
+      <a href="{% url 'machine_update' machine.id %}" class="btn btn-success">Modifier</a>
       <a href="{% url 'machine_list' %}" class="btn btn-primary">Retour</a>
     </div>
   </div>

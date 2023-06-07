@@ -5,7 +5,7 @@ from .models import Machine, Infrastructure, Utilisateur
 class AddMachineForm(forms.ModelForm):
     class Meta:
         model = Machine
-        fields = ['nom', 'user', 'maintenanceDate', 'mach', 'ip','etat']
+        fields = ['nom', 'user', 'maintenanceDate', 'mach', 'ip', 'etat']
         widgets = {
             'nom': forms.TextInput(attrs={'class': 'form-control'}),
             'user': forms.Select(attrs={'class': 'form-control'}),

@@ -10,7 +10,7 @@
         </div>
     <div class="mb-3">
       <label for="maintenanceDate" class="form-label">Date de maintenance:</label>
-      {{ form.maintenanceDate }}
+      <input type="date" class="form-control" id="maintenanceDate" name="maintenanceDate" required>
     </div>
     <div class="mb-3">
       <label for="ip" class="form-label">Ip:</label>
@@ -21,11 +21,16 @@
       {{ form.mach }}
     </div>
     <div class="mb-3">
+      <label for="infrastructure" class="form-label">Etat:</label>
+      {{ form.etat }}
+    </div>
+    <div class="mb-3">
       <label for="user" class="form-label">Utilisateur:</label>
          {{ form.user }}
     </div>
 
     <button type="submit" class="btn btn-primary">Ajouter</button>
+
   </form>
 </div>
 {% endblock %}

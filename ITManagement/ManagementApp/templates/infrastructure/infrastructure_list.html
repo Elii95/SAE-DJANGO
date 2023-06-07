@@ -2,31 +2,24 @@
 
 {% block content %}
 <div class="container">
-    <h1>Infrastructures</h1>
+    <h1>Liste des infrastructures</h1>
     <a href="{% url 'infrastructure_add' %}" class="btn btn-primary mb-3">Add Infrastructure</a>
-    <div class="card">
-    
-    <table class="table">
-            <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>Responsable</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for infrastructure in infrastructures %}
-                <tr>
-                    <td>{{ infrastructure.nom }}</td>
-                    <td> {{ infrastructure.responsable.prenom }} {{ infrastructure.responsable.nom }}</td>
-                    <td>
-                        <a href="{% url 'infrastructure_detail' infrastructure.id %}" class="btn btn-info btn-sm mb-3">Detail</a>
-                        <a href="{% url 'infrastructure_delete' infrastructure.id%}" class="btn btn-danger btn-sm mb-3">Delete</a>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-</div>
+    <div class="row">
+        {% for infrastructure in infrastructures %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">{{ infrastructure.nom }}</h5>
+                    <p class="card-text">Responsable: {{ infrastructure.responsable.prenom }} {{ infrastructure.responsable.nom }}</p>
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'infrastructure_detail' infrastructure.id %}" class="btn btn-info">Detail</a>
+                        <a href="{% url 'infrastructure_delete' infrastructure.id%}" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 
 {% endblock %}

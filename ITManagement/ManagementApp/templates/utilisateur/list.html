@@ -4,36 +4,24 @@
 <div class="container">
 
 <h1>Liste des utilisateurs</h1>
-<a href="{% url 'utilisateur_create' %}" class="btn btn-primary mb-3"> Add Utilisateur
-        </a>
-        <div class="card">
-
-        <table class="table">
-            <thead>
-                <tr>
-                  <th>Nom</th>
-                  <th>Prénom</th>
-                  <th>Email</th>
-                  <th>Rôle</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-              {% for utilisateur in utilisateurs %}
-              <tr>
-                <td>{{ utilisateur.nom }}</td>
-                <td>{{ utilisateur.prenom }}</td>
-                <td>{{ utilisateur.email }}</td>
-                <td>{{ utilisateur.role }}</td>
-                    <td>
-                        <a href="{% url 'utilisateur_detail' utilisateur.id %}" class="btn btn-info btn-sm mb-3"> Detail  </a>
-                        <a href="{% url 'utilisateur_update' utilisateur.id %}" class="btn btn-primary btn-sm mb-3"> Update  </a>
-                        <a href="{% url 'utilisateur_delete' utilisateur.id %}"  class="btn btn-danger btn-sm mb-3">Delete  </a>                  
-                      </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+<a href="{% url 'utilisateur_create' %}" class="btn btn-primary mb-3">Add Utilisateur</a>
+<div class="row">
+    {% for utilisateur in utilisateurs %}
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">{{ utilisateur.nom }}</h5>
+                <p class="card-text">Prénom: {{ utilisateur.prenom }}</p>
+                <p class="card-text">Email: {{ utilisateur.email }}</p>
+                <p class="card-text">Rôle: {{ utilisateur.role }}</p>
+                <div class="d-grid gap-2">
+                    <a href="{% url 'utilisateur_detail' utilisateur.id %}" class="btn btn-info">Detail</a>
+                    <a href="{% url 'utilisateur_delete' utilisateur.id %}" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
 </div>
 </div>
 

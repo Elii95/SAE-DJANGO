@@ -26,10 +26,10 @@ class Machine(models.Model):
         ('Serveur' , ('Serveur - Simple Server to deploy virtual machines')),
         ('Switch' , ('Switch - To maintains and connect servers')),
     )
-		ETAT_CHOICES = (
+    ETAT_CHOICES = (
         ('en ligne', ('en ligne')),
         ('hors ligne', ('hors ligne')),
-    )    
+    )
     id = models.AutoField(
         primary_key=True,
         editable=False
@@ -57,4 +57,3 @@ class Infrastructure(models.Model):
 
     def __str__(self):
         return self.nom
-

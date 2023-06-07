@@ -4,9 +4,12 @@
   <h2>Détails de l'utilisateur</h2>
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title">{{ utilisateur.nom }} {{ utilisateur.prenom }}</h5>
+      <h5 class="card-title py-2">{{ utilisateur.nom }} {{ utilisateur.prenom }}</h5>
       <p class="card-text"><strong>Email:</strong> {{ utilisateur.email }}</p>
       <p class="card-text"><strong>Rôle:</strong> {{ utilisateur.role }}</p>
+      <a href="{% url 'utilisateur_update' utilisateur.id %}" class="btn btn-success">Modifier</a>
+      <a href="{% url 'utilisateur_list' %}" class="btn btn-primary">Retour</a>
+
     </div>
   </div>
 </div>
