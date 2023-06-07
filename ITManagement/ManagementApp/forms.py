@@ -5,12 +5,13 @@ from .models import Machine, Infrastructure, Utilisateur
 class AddMachineForm(forms.ModelForm):
     class Meta:
         model = Machine
-        fields = ['nom', 'user', 'maintenanceDate', 'mach']
+        fields = ['nom', 'user', 'maintenanceDate', 'mach', 'ip']
         widgets = {
             'nom': forms.TextInput(attrs={'class': 'form-control'}),
             'user': forms.Select(attrs={'class': 'form-control'}),
             'maintenanceDate': forms.DateInput(attrs={'class': 'form-control'}),
             'mach': forms.Select(attrs={'class': 'form-control'}),
+            'ip': forms.TextInput(attrs={'class': 'form-control'}),
         }
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -19,9 +20,12 @@ class AddMachineForm(forms.ModelForm):
 class InfrastructureForm(forms.ModelForm):
     class Meta:
         model = Infrastructure
-        fields = ['nom', 'responsable']
+        fields = ['nom', 'responsable', 'machine', 'etage']
         widgets = {
-            'responsable': forms.Select(attrs={'class': 'form-control'})
+            'nom': forms.TextInput(attrs={'class': 'form-control'}),
+            'responsable': forms.Select(attrs={'class': 'form-control'}),
+            'machine': forms.Select(attrs={'class': 'form-control'}),
+            'etage': forms.NumberInput(attrs={'class': 'form-control'}),
         }
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -32,3 +36,10 @@ class UtilisateurForm(forms.ModelForm):
     class Meta:
         model = Utilisateur
         fields = ('prenom', 'nom', 'email', 'role')
+        widgets = {
+            'prenom': forms.TextInput(attrs={'class': 'form-control'}),
+            'nom': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'role': forms.Select(attrs={'class': 'form-control'}),
+        }
+        

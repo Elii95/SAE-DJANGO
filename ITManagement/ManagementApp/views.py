@@ -1,11 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Machine, Infrastructure, Utilisateur
+from .models import Machine, Infrastructure, Utilisateur, Update
 from .forms import AddMachineForm, InfrastructureForm, UtilisateurForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
 def home(request):
-    return render(request, 'templates/index.html')
+    return render(request, 'ManagementApp/home.html')
 
 def admin_login(request):
     if request.method == 'POST':
@@ -31,10 +31,21 @@ def machine_list(request):
     context = {'machines': machines}
     return render(request, 'machine/machine_list.html', context)
 
+def update_machine(request, machine_id):
+    machine = Machine.objects.get(id=machine_id)
+
+    update = Update(machine=machine, updated_by=request.user)
+    update.save()
+
+    return redirect('machine_detail', machine_id=machine_id)
+
 @login_required
 def machine_detail(request, pk):
     machine = get_object_or_404(Machine, id=pk)
-    context = {'machine': machine}
+    updates = Update.objects.filter(machine=machine).order_by('-updated_at')
+    context = {'machine': machine,
+               'updates': updates
+               }
     return render(request, 'machine/machine_detail.html', context)
 
 @login_required
@@ -42,7 +53,7 @@ def machine_add(request):
     if request.method == 'POST':
         form = AddMachineForm(request.POST or None)
         if form.is_valid():
-            new_machine = Machine(nom=form.cleaned_data['nom'], user=form.cleaned_data['user'], maintenanceDate=form.cleaned_data['maintenanceDate'], mach=form.cleaned_data['mach'])
+            new_machine = Machine(nom=form.cleaned_data['nom'], user=form.cleaned_data['user'], maintenanceDate=form.cleaned_data['maintenanceDate'], mach=form.cleaned_data['mach'], ip=form.cleaned_data['ip'])
             new_machine.save()
             return redirect('machine_list')
     else:
@@ -59,6 +70,7 @@ def machine_delete(request, pk):
     context = {'machine': machine}
     return render(request, 'machine/confirm_delete.html', context)
 
+
 @login_required
 def infrastructure_list(request):
     infrastructures = Infrastructure.objects.all()  
@@ -74,7 +86,7 @@ def infrastructure_add(request):
     if request.method == 'POST':
         form = InfrastructureForm(request.POST)
         if form.is_valid():
-            infrastructure = Infrastructure(nom=form.cleaned_data['nom'], responsable=form.cleaned_data['responsable'])
+            infrastructure = Infrastructure(nom=form.cleaned_data['nom'], responsable=form.cleaned_data['responsable'], machine=form.cleaned_data['machine'], etage=form.cleaned_data['etage'])
             infrastructure.save()
             return redirect('infrastructure_detail', pk=infrastructure.pk)
             

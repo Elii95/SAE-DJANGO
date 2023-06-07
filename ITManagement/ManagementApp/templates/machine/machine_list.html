@@ -1,31 +1,31 @@
 {% extends 'index.html' %}
-
 {% block content %}
-    <h1>Machines</h1>
-    <a href="{% url 'machine_add' %}" class="btn btn-primary btn-sm mb-3"> Add Machine
-        </a>
-    <ul>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>utilisateur</th>
-                    <th>Date de maintenance</th>
-                    <th>Machine</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for machine in machines %}
-                <tr>
-                    <td> {{ machine.user.prenom}} {{ machine.user.nom }}</td>
-                    <td>{{ machine.maintenanceDate }}</td>
-                    <td>{{ machine.mach }}</td>
-                    <td>
-                        <a href="{% url 'machine_detail' machine.id %}" class="btn btn-info btn-sm mb-3"> Detail  </a>
-                        <a href="{% url 'machine_delete' machine.id %}"  class="btn btn-danger btn-sm mb-3">Delete  </a>                  
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </ul>
+<div class="container">
+  <h1>Liste des machines</h1>
+  <a href="{% url 'machine_add' %}" class="btn btn-primary mb-3">Ajouter une machine</a>
+  <div class="card">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Utilisateur</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for machine in machines %}
+      <tr>
+        <td>{{ machine.nom }}</td>
+        <td>{{ machine.user }}</td>
+        <td>
+          <a href="{% url 'machine_detail' machine.id %}" class="btn btn-sm btn-info">Détails</a>
+          <a href="{% url 'machine_delete' machine.id %}" class="btn btn-sm btn-danger">Supprimer</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+</div>
 {% endblock %}

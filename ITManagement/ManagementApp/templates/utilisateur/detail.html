@@ -1,9 +1,13 @@
 {% extends 'index.html' %}
-
 {% block content %}
-  <h1>Détails de l'utilisateur</h1>
-  <p>Nom : {{ utilisateur.nom }}</p>
-  <p>Prénom : {{ utilisateur.prenom }}</p>
-  <p>Email : {{ utilisateur.email }}</p>
-  <p>Rôle : {{ utilisateur.role }}</p>
+<div class="container">
+  <h2>Détails de l'utilisateur</h2>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ utilisateur.nom }} {{ utilisateur.prenom }}</h5>
+      <p class="card-text"><strong>Email:</strong> {{ utilisateur.email }}</p>
+      <p class="card-text"><strong>Rôle:</strong> {{ utilisateur.role }}</p>
+    </div>
+  </div>
+</div>
 {% endblock %}

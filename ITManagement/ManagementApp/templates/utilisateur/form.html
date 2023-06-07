@@ -1,10 +1,27 @@
 {% extends 'index.html' %}
-
 {% block content %}
-  <h1>Ajouter/Modifier un utilisateur</h1>
-  <form method="post">
+<div class="container">
+  <h2>Ajouter un utilisateur</h2>
+  <form method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Enregistrer</button>
+    <div class="mb-3">
+      <label for="nom" class="form-label">Nom</label>
+      {{ form.nom }}
+    </div>
+    <div class="mb-3">
+      <label for="prenom" class="form-label">Prénom</label>
+      {{ form.prenom }}
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      {{ form.email }}
+    </div>
+    <div class="mb-3">
+      <label for="role" class="form-label">Rôle</label>
+      {{ form.role }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ajouter</button>
   </form>
+</div>
 {% endblock %}

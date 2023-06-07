@@ -1,20 +1,27 @@
 {% extends 'index.html' %}
-
 {% block content %}
-    <h1>Add Infrastructure</h1>
-    <form method="post">
-        {% csrf_token %}
-        
-        <div class="form-group">
-            <label for="name">Nom:</label>
-            {{ form.nom }}
-        </div>
-        
-        <div class="form-group">
-            <label for="responsable">Responsable:</label>
-            {{ form.responsable }}
-        </div>
-        
-        <input type="submit" value="Add" class="btn btn-primary">
-    </form>
+<div class="container">
+  <h2>Ajouter une infrastructure</h2>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="nom" class="form-label">Nom:</label>
+      {{ form.nom }}
+    </div>
+    <div class="mb-3">
+      <label for="etage" class="form-label">Etage:</label>
+      {{ form.etage }}
+    </div>
+    <div class="mb-3">
+      <label for="responsable" class="form-label">Responsable:</label>
+        {{ form.responsable }}
+    </div>
+    <div class="mb-3">
+      <label for="machine" class="form-label">Machine:</label>
+        {{ form.machine }}
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+  </form>
+</div>
 {% endblock %}

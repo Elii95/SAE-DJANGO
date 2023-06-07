@@ -1,9 +1,16 @@
 {% extends 'index.html' %}
-
 {% block content %}
-    <h1>{{ machine.nom }}</h1>
-    <p> <strong>Id</strong> : {{ machine.id}}</p>
-    <p> <strong> User </strong> : {{ machine.user.username }}</p>
-    <p> <strong>Date de maintenance </strong> : {{ machine.maintenanceDate}}</p>
-    <p> <strong>Machine </strong> : {{ machine.mach}}</p>
+<div class="container">
+  <h2>Détails de la machine</h2>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ machine.nom }}</h5>
+      <p class="card-text">Type: {{ machine.mach }}</p>
+      <p class="card-text">Maintenance Date: {{ machine.maintenanceDate }}</p>
+      <p class="card-text">Ip: {{ machine.ip }}</p>
+      <p class="card-text">Utilisateur: {{ machine.user }}</p>
+      <a href="{% url 'machine_list' %}" class="btn btn-primary">Retour</a>
+    </div>
+  </div>
+</div>
 {% endblock %}

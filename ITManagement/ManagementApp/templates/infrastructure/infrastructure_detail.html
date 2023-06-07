@@ -1,6 +1,14 @@
 {% extends 'index.html' %}
-
-{% block content %} 
-    <h1>{{ infrastructure.nom }}</h1>
-    <p>Responsable: {{ infrastructure.responsable.prenom }} {{ infrastructure.responsable.nom }}</p>
+{% block content %}
+<div class="container">
+  <h2>Détails de l'infrastructure</h2>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ infrastructure.nom }}</h5>
+      <p class="card-text">Etage: {{ infrastructure.etage }}</p>
+      <p class="card-text">Responsable: {{ infrastructure.responsable }}</p>
+      <p class="card-text">Machine: {{ infrastructure.machine }}</p>
+    </div>
+  </div>
+</div>
 {% endblock %}

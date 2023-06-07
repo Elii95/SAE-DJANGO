@@ -1,10 +1,13 @@
 {% extends 'index.html' %}
 
 {% block content %}
+<div class="container">
+
 <h1>Liste des utilisateurs</h1>
-<a href="{% url 'utilisateur_create' %}" class="btn btn-primary btn-sm mb-3"> Add User
+<a href="{% url 'utilisateur_create' %}" class="btn btn-primary mb-3"> Add Utilisateur
         </a>
-    <ul>
+        <div class="card">
+
         <table class="table">
             <thead>
                 <tr>
@@ -24,12 +27,14 @@
                 <td>{{ utilisateur.role }}</td>
                     <td>
                         <a href="{% url 'utilisateur_detail' utilisateur.id %}" class="btn btn-info btn-sm mb-3"> Detail  </a>
+                        <a href="{% url 'utilisateur_update' utilisateur.id %}" class="btn btn-primary btn-sm mb-3"> Update  </a>
                         <a href="{% url 'utilisateur_delete' utilisateur.id %}"  class="btn btn-danger btn-sm mb-3">Delete  </a>                  
                       </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-    </ul>
-  
+</div>
+</div>
+
 {% endblock %}
