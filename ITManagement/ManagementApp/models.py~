@@ -26,20 +26,15 @@ class Machine(models.Model):
         ('Serveur' , ('Serveur - Simple Server to deploy virtual machines')),
         ('Switch' , ('Switch - To maintains and connect servers')),
     )
-		ETAT_CHOICES = (
-        ('en ligne', ('en ligne')),
-        ('hors ligne', ('hors ligne')),
-    )    
     id = models.AutoField(
         primary_key=True,
         editable=False
     )
     user = models.OneToOneField(Utilisateur, on_delete=models.CASCADE, null=True, blank=True,limit_choices_to={'role': 'employe'})
-    nom = models.CharField(max_length=20)
+    nom = models.CharField(max_length=6)
     maintenanceDate = models.DateField(default= datetime.now)
     mach = models.CharField(max_length=32, choices=TYPE, default='PC')
     ip = models.GenericIPAddressField(default='0.0.0.0')
-    etat = models.CharField(max_length=20, choices=ETAT_CHOICES, default='en ligne')
 
     def __str__(self):
         return self.nom
@@ -58,3 +53,10 @@ class Infrastructure(models.Model):
     def __str__(self):
         return self.nom
 
+class Update(models.Model):
+    machine = models.ForeignKey(Machine, on_delete=models.CASCADE)
+    updated_by = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)
+    updated_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Update for {self.machine.nom} by {self.updated_by.username}"
